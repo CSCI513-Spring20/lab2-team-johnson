@@ -1,5 +1,7 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -9,12 +11,14 @@ import javafx.stage.Stage;
 
 public class OceanExplorer extends Application {
 	
+	Image shipImage;
+	ImageView shipImageView;
+	final int dimension = 10;
+	final int scale = 50;
+	OceanMap oceanMap = new OceanMap();
+	boolean[][] oceanGrid = oceanMap.getMap();
 	
 	public void start(Stage oceanStage) throws Exception {
-		final int dimension = 10;
-		final int scale = 50;
-		OceanMap oceanMap = new OceanMap();
-		boolean[][] oceanGrid = oceanMap.getMap();
 		AnchorPane myPane = new AnchorPane();
 		Scene scene = new Scene(myPane, scale*dimension, scale*dimension);
 		
@@ -34,6 +38,14 @@ public class OceanExplorer extends Application {
 	
 	public static void main(String[] args) {
 		launch(args);
+	}
+	
+	public void loadShipImage(AnchorPane root) {
+		shipImage = new Image("ship.png", 50, 50, true, true);
+		shipImageView = new ImageView(shipImage);
+		shipImageView.setX(oceanMap.getShipLocation().x * scale);
+		shipImageView.setY(oceanMap.getShipLocation().y * scale);
+		root.getChildren().add(shipImageView);
 	}
 
 }
