@@ -1,7 +1,9 @@
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -11,17 +13,18 @@ import javafx.stage.Stage;
 
 public class OceanExplorer extends Application {
 	
-	Image shipImage;
-	ImageView shipImageView;
+	AnchorPane myPane = new AnchorPane();
 	final int dimension = 10;
 	final int scale = 50;
+	Scene scene = new Scene(myPane, scale*dimension, scale*dimension);
+	Image shipImage;
+	ImageView shipImageView;
 	OceanMap oceanMap = new OceanMap();
 	boolean[][] oceanGrid = oceanMap.getMap();
 	Ship ship = new Ship(5, 5);
 	
+	
 	public void start(Stage oceanStage) throws Exception {
-		AnchorPane myPane = new AnchorPane();
-		Scene scene = new Scene(myPane, scale*dimension, scale*dimension);
 		
 		oceanStage.setScene(scene);
 		oceanStage.setTitle("Christopher Columbus Game");
@@ -36,19 +39,45 @@ public class OceanExplorer extends Application {
 			}
 		}
 		
-		loadShipImage(myPane);
+		loadShipImage();
 	}
 	
 	public static void main(String[] args) {
 		launch(args);
 	}
 	
-	public void loadShipImage(AnchorPane myPane) {
+	public void loadShipImage() {
 		shipImage = new Image("ship.png", 50, 50, true, true);
 		shipImageView = new ImageView(shipImage);
 		shipImageView.setX(ship.getShipLocation().x * scale);
 		shipImageView.setY(ship.getShipLocation().y * scale);
 		myPane.getChildren().add(shipImageView);
+	}
+	
+	private void startSailing() {
+		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+			public void handle(KeyEvent ke) {
+				switch(ke.getCode())
+				{
+					case RIGHT:
+						ship.goEast();
+						break;
+					case LEFT:
+						ship.goWest();
+						break;
+					case UP:
+						ship.goNorth();
+						break;
+					case DOWN:
+						ship.goSouth();
+						break;
+					default:
+						break;
+				}
+				shipImageView.setX(ship.getShipLocation().x * scale);
+				shipImageView.setY(ship.getShipLocation().y * scale);
+			}
+		});	
 	}
 
 }
