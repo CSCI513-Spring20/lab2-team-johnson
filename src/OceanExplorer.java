@@ -40,6 +40,7 @@ public class OceanExplorer extends Application {
 		}
 		
 		loadShipImage();
+		startSailing();
 	}
 	
 	public static void main(String[] args) {
