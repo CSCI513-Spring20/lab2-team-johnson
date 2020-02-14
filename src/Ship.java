@@ -19,4 +19,20 @@ public class Ship
 	{
 		return currentLocation;
 	}
+	
+	public void goEast() {
+		currentLocation.x = currentLocation.x + 1;
+	}
+	
+	public void goWest() {
+		currentLocation.x = currentLocation.x - 1;
+	}
+	
+	public void goNorth() {
+		currentLocation.y = currentLocation.y - 1;
+	}
+	
+	public void goSouth() {
+		currentLocation.y = currentLocation.y + 1;
+	}
 }
