@@ -17,6 +17,7 @@ public class OceanExplorer extends Application {
 	final int scale = 50;
 	OceanMap oceanMap = new OceanMap();
 	boolean[][] oceanGrid = oceanMap.getMap();
+	Ship ship = new Ship(5, 5);
 	
 	public void start(Stage oceanStage) throws Exception {
 		AnchorPane myPane = new AnchorPane();
@@ -34,18 +35,20 @@ public class OceanExplorer extends Application {
 				myPane.getChildren().add(rect);
 			}
 		}
+		
+		loadShipImage(myPane);
 	}
 	
 	public static void main(String[] args) {
 		launch(args);
 	}
 	
-	public void loadShipImage(AnchorPane root) {
+	public void loadShipImage(AnchorPane myPane) {
 		shipImage = new Image("ship.png", 50, 50, true, true);
 		shipImageView = new ImageView(shipImage);
-		shipImageView.setX(oceanMap.getShipLocation().x * scale);
-		shipImageView.setY(oceanMap.getShipLocation().y * scale);
-		root.getChildren().add(shipImageView);
+		shipImageView.setX(ship.getShipLocation().x * scale);
+		shipImageView.setY(ship.getShipLocation().y * scale);
+		myPane.getChildren().add(shipImageView);
 	}
 
 }
