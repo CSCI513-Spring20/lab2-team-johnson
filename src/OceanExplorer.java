@@ -29,22 +29,24 @@ public class OceanExplorer extends Application {
 		oceanStage.setScene(scene);
 		oceanStage.setTitle("Christopher Columbus Game");
 		oceanStage.show();
-		
-		for (int x = 0; x < dimension; x++) {
-			for (int y = 0; y < dimension; y++) {
-				Rectangle rect = new Rectangle(x*scale, y*scale, scale, scale);
-				rect.setStroke(Color.BLACK);
-				rect.setFill(Color.PALETURQUOISE);
-				myPane.getChildren().add(rect);
-			}
-		}
-		
+		drawMap();
 		loadShipImage();
 		startSailing();
 	}
 	
 	public static void main(String[] args) {
 		launch(args);
+	}
+	
+	public void drawMap() {
+		for (int x = 0; x < dimension; x++) {
+			for (int y = 0; y < dimension; y++) {
+				Rectangle rect = new Rectangle(x*scale, y*scale, scale, scale);
+				rect.setStroke(Color.BLACK);
+				rect.setFill(Color.AQUAMARINE);
+				myPane.getChildren().add(rect);
+			}
+		}
 	}
 	
 	public void loadShipImage() {
