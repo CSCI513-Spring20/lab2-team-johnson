@@ -4,11 +4,6 @@ public class Ship
 {
 	Point currentLocation = new Point();
 	
-	public Ship()
-	{
-		
-	}
-	
 	public Ship(int X, int Y) 
 	{
 		currentLocation.x = X;
@@ -21,18 +16,18 @@ public class Ship
 	}
 	
 	public void goEast() {
-		currentLocation.x = currentLocation.x + 1;
+		if (currentLocation.x < 9) currentLocation.x = currentLocation.x + 1;
 	}
 	
 	public void goWest() {
-		currentLocation.x = currentLocation.x - 1;
+		if (currentLocation.x > 0) currentLocation.x = currentLocation.x - 1;
 	}
 	
 	public void goNorth() {
-		currentLocation.y = currentLocation.y - 1;
+		if (currentLocation.y > 0) currentLocation.y = currentLocation.y - 1;
 	}
 	
 	public void goSouth() {
-		currentLocation.y = currentLocation.y + 1;
+		if (currentLocation.y < 9) currentLocation.y = currentLocation.y + 1;
 	}
 }
